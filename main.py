@@ -12,7 +12,7 @@ whitelist_enabled = config["reactions"]["whitelist enabled"]
 whitelist = config["reactions"]["whitelist"]
 blacklist = config["reactions"]["blacklist"]
 
-starred = []
+starred = {}
 
 
 def count_reacts(message):
@@ -68,19 +68,23 @@ class MyClient(discord.Client):
                 return x.format(
                     reaction.message.content,
                     reaction.message.author.mention,
-                    reaction.message.timestamp.strftime(config["dateformat"]),
-                    reaction.message.channel.mention
+                    reaction.message.timestamp.strftime(config["date format"]),
+                    reaction.message.channel.mention,
+                    reaction.message.id
                 )
 
             em = discord.Embed()
+            em.set_author(name=reaction.message.author.name, icon_url=reaction.message.author.avatar_url)
             em.title = f(config["embed"]["title"])
             em.colour = config["embed"]["colour"]
             em.description = f(config["embed"]["description"])
+            em.set_footer(text=str(count_reacts(reaction.message)), icon_url=config["star url"])
             for field in config["embed"]["fields"]:
                 em.add_field(name=f(field["name"]), value=f(field["value"]))
-            await client.send_message(client.get_channel(channel), embed=em)
-
-
+            if reaction.message.id not in starred:
+                starred[reaction.message.id] = await client.send_message(client.get_channel(channel), embed=em)
+            else:
+                await client.edit_message(starred[reaction.message.id], embed = em)
 print("Creating client")
 client = MyClient()
 if token is None or len(token) == 0:

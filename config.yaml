@@ -1,25 +1,27 @@
 prefix: "~~"
 channel: "452530315630477333"
-dateformat: "%Y-%m-%d %H:%M" # https://docs.python.org/2/library/datetime.html#strftime-strptime-behavior
-
+date format: "%Y-%m-%d %H:%M" # https://docs.python.org/2/library/datetime.html#strftime-strptime-behavior
+star url: "https://cdn.discordapp.com/emojis/435619109993185291.gif"
 embed:
   # {0} = content
-  # {1} = author
+  # {1} = author (mention)
   # {2} = timestamp
-  # {3} = channel
-  title: "Super Duper Message" # empty for none
+  # {3} = channel (mention)
+  # {4} = message ID
+  title: ""
   colour: 0x00FF44
-  fields:
-  - name: "Author"
-    value: "{1}"
-  - name: "Timestamp"
-    value: "{2}"
-  - name: "Channel"
-    value: "in {3}"
+  fields: []
+#  fields: # example
+#  - name: "Author"
+#    value: "{1}"
+#  - name: "Timestamp"
+#    value: "{2}"
+#  - name: "Channel"
+#    value: "in {3}"
   description: "{0}"
 
 reactions:
-  threshold: 2 # must be hit, not surpassed
+  threshold: 3 # must be hit, not surpassed
   whitelist enabled: false # if true, then blacklist is ignored
   whitelist:
   - "<:rsNice:394493027747627008>"
