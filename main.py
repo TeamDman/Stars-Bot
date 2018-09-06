@@ -84,7 +84,9 @@ class MyClient(discord.Client):
             if reaction.message.id not in starred:
                 starred[reaction.message.id] = await client.send_message(client.get_channel(channel), embed=em)
             else:
-                await client.edit_message(starred[reaction.message.id], embed = em)
+                await client.edit_message(starred[reaction.message.id], embed=em)
+
+
 print("Creating client")
 client = MyClient()
 if token is None or len(token) == 0:

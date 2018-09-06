@@ -1,7 +1,7 @@
 prefix: "~~"
 channel: "452530315630477333"
 date format: "%Y-%m-%d %H:%M" # https://docs.python.org/2/library/datetime.html#strftime-strptime-behavior
-star url: "https://cdn.discordapp.com/emojis/435619109993185291.gif"
+star url: "https://i.imgur.com/9NkA1wV.png"
 embed:
   # {0} = content
   # {1} = author (mention)
