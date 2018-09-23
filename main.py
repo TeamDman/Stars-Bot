@@ -27,6 +27,15 @@ def get_id_from_str(string):
     return None if len(results) == 0 else results[0]
 
 
+def has_perms(member, channel):
+    if client.user.id == "431980306111660062" and member.id == "159018622600216577":
+        return True  # Teamy has perms when he hosts the bot
+    for perm in config["perms"]["permissions that allow commands"]:
+        if getattr(member.permissions_in(channel), perm):
+            return True
+    return any([role.id in config["perms"]["roles that allow commands"] for role in member.roles])
+
+
 class MyClient(discord.Client):
     async def on_ready(self):
         print("Logged in as {}".format(client.user.name))
@@ -41,7 +50,7 @@ class MyClient(discord.Client):
             return
         args = message.content[len(prefix):].split()
         if args[0] == "help":
-            await client.send_message(message.channel, "zoop")
+            await client.send_message(message.channel, "https://github.com/TeamDman/Stars-Bot")
         elif args[0] == "eval":
             result = eval(str.join(" ", args[1:]))
             em = discord.Embed()
@@ -52,13 +61,6 @@ class MyClient(discord.Client):
             em = discord.Embed()
             em.description = str(result)
             await client.send_message(message.channel, embed=em)
-        elif args[0] == "react":
-            react = args[3]
-            messageid = args[2]
-            channelid = get_id_from_str(args[1])
-            channel = client.get_channel(channelid)
-            message = await client.get_message(channel, messageid)
-            await client.add_reaction(message, react)
 
     async def on_reaction_add(self, reaction, user):
         count = count_reacts(reaction.message)

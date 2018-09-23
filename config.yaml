@@ -2,6 +2,14 @@ prefix: "~~"
 channel: "452530315630477333"
 date format: "%Y-%m-%d %H:%M" # https://docs.python.org/2/library/datetime.html#strftime-strptime-behavior
 star url: "https://i.imgur.com/9NkA1wV.png"
+
+perms:
+  permissions that allow commands:
+    - "manage_roles"
+  roles that allow commands:
+    - "383961248888258561" # Supreme Beings
+
+
 embed:
   # {0} = content
   # {1} = author (mention)
