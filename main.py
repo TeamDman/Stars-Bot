@@ -7,7 +7,7 @@ config = YAML().load(open("config.yaml"))
 
 prefix = config["prefix"]
 threshold = config["reactions"]["threshold"]
-channel = config["channel"]
+channel = config["report"]["channel"]
 whitelist_enabled = config["reactions"]["whitelist enabled"]
 whitelist = config["reactions"]["whitelist"]
 blacklist = config["reactions"]["blacklist"]
@@ -70,7 +70,7 @@ class MyClient(discord.Client):
                 return x.format(
                     reaction.message.content,
                     reaction.message.author.mention,
-                    reaction.message.timestamp.strftime(config["date format"]),
+                    reaction.message.timestamp.strftime(config["report"]["date format"]),
                     reaction.message.channel.mention,
                     reaction.message.id
                 )
@@ -80,7 +80,7 @@ class MyClient(discord.Client):
             em.title = f(config["embed"]["title"])
             em.colour = config["embed"]["colour"]
             em.description = f(config["embed"]["description"])
-            em.set_footer(text=str(count_reacts(reaction.message)), icon_url=config["star url"])
+            em.set_footer(text=str(count_reacts(reaction.message)), icon_url=config["report"]["star url"])
             for field in config["embed"]["fields"]:
                 em.add_field(name=f(field["name"]), value=f(field["value"]))
             if reaction.message.id not in starred:
